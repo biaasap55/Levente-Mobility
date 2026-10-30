@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levente Mobility — Închirieri vehicule București</title>
+<meta name="description" content="Închirieri mașini și scutere noi în București. Prețuri corecte, fără bătăi de cap. Rezervă în câteva secunde.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #F5F5F0;
+  --fg: #1A1A1A;
+  --fg-muted: #6B6B6B;
+  --surface: #FFFFFF;
+  --accent: #1E3A8A;
+  --accent-hover: #172E6E;
+  --border: #E0E0DA;
+  --hero-bg: #FFFFFF;
+  --radius: 10px;
+  --card-bg: #F0F0EB;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.logo { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--fg-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--fg); }
+
+/* HERO */
+.hero {
+  background: var(--hero-bg);
+  text-align: center;
+  padding: 80px 16px 100px;
+}
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+.hero h1 .accent { color: var(--accent); }
+.hero p {
+  font-size: 18px;
+  color: var(--fg-muted);
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  font-family: inherit;
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--fg);
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+}
+.btn-outline:hover { border-color: var(--fg-muted); background: rgba(0,0,0,0.02); }
+
+/* STATS */
+.stats {
+  margin-top: -56px;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 60px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.stat-card .icon { font-size: 24px; margin-bottom: 8px; }
+.stat-card .label { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; color: var(--fg); }
+.stat-card .sub { font-size: 13px; color: var(--fg-muted); }
+
+/* SECTIONS */
+section { padding: 60px 0; }
+.section-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(30,58,138,0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.section-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+
+/* FLEET */
+#flota { padding-top: 0; }
+.fleet-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.fleet-card-img {
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg);
+  position: relative;
+  overflow: hidden;
+}
+.fleet-card-img img {
+  max-height: 260px;
+  max-width: 80%;
+  width: auto;
+  object-fit: contain;
+}
+.fleet-card-body { padding: 28px; }
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #166534;
+  background: #DCFCE7;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.fleet-card-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.fleet-card-body .subtitle { font-size: 14px; color: var(--fg-muted); margin-bottom: 20px; }
+.quick-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+.spec-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--fg-muted); }
+
+.specs-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.specs-panel.open { max-height: 600px; }
+.specs-inner {
+  padding: 20px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+.specs-inner h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--fg); }
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  margin-bottom: 16px;
+}
+.specs-grid .row { font-size: 13px; color: var(--fg-muted); }
+.specs-grid .row strong { color: var(--fg); font-weight: 500; }
+.specs-features { font-size: 13px; color: var(--fg-muted); line-height: 1.7; }
+.specs-features strong { color: var(--fg); font-weight: 500; }
+
+.card-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.about-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: rgba(30,58,138,0.08);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.about-icon svg { width: 22px; height: 22px; color: var(--accent); }
+.about-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.about-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+
+/* CONTACT */
+.contact-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.contact-box p { font-size: 16px; color: var(--fg-muted); margin-bottom: 24px; }
+.contact-box .location { font-size: 14px; color: var(--fg-muted); margin-top: 20px; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 32px 16px;
+  font-size: 13px;
+  color: var(--fg-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 13px; }
+  .hero { padding: 48px 16px 80px; }
+  .hero p { font-size: 16px; }
+  .fleet-card-img { height: 220px; }
+  .specs-grid { grid-template-columns: 1fr; }
+  .card-actions { flex-direction: column; }
+  .card-actions a, .card-actions button { width: 100%; text-align: center; }
+  .contact-box { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">LEVENTE <span>MOBILITY</span></div>
+    <div class="nav-links">
+      <a href="#flota">Flotă</a>
+      <a href="#despre">Despre</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Click. <span class="accent">Rent.</span> Go.</h1>
+    <p>Mașini și scutere noi, prețuri corecte, fără bătăi de cap. Rezervă în câteva secunde.</p>
+    <a href="mailto:danaa_a@yahoo.com?subject=Inchiriere%20vehicul%20Bucuresti" class="btn-primary">Rezervă acum</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="icon">📍</div>
+        <div class="label">București</div>
+        <div class="sub">Locație centrală</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div>
+        <div class="label">11 Vehicule</div>
+        <div class="sub">Mașini & scutere</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon">🕐</div>
+        <div class="label">24/7 Suport clienți</div>
+        <div class="sub">Mereu disponibili</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLEET -->
+<section id="flota">
+  <div class="container">
+    <span class="section-label">Flota noastră</span>
+    <h2 class="section-heading">Alege vehiculul potrivit</h2>
+
+    <!-- Toyota Corolla -->
+    <div class="fleet-card">
+      <div class="fleet-card-img">
+        <img src="toyota.png" alt="Toyota Corolla 2026" style="max-height:460px;max-width:100%">
+      </div>
+      <div class="fleet-card-body">
+        <span class="badge">1 disponibil</span>
+        <h3>Toyota Corolla</h3>
+        <p class="subtitle">Sedan compact · Model 2026</p>
+        <div class="quick-specs">
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14l-4-4h3V8h2v4h3l-4 4z"/></svg>
+            Automat
+          </div>
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h2l3-9 4 18 3-9h6"/></svg>
+            Benzină
+          </div>
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            5 locuri
+          </div>
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="5"/></svg>
+            Climatizare
+          </div>
+        </div>
+        <div class="specs-panel" id="specs-corolla">
+          <div class="specs-inner">
+            <h4>Specificații tehnice</h4>
+            <div class="specs-grid">
+              <div class="row"><strong>Motor:</strong> 2.0L Inline 4</div>
+              <div class="row"><strong>Putere:</strong> 169 CP</div>
+              <div class="row"><strong>Cuplu:</strong> 205 Nm</div>
+              <div class="row"><strong>Transmisie:</strong> CVT automat</div>
+              <div class="row"><strong>Tracțiune:</strong> FWD</div>
+              <div class="row"><strong>Consum:</strong> 6.7L/100km</div>
+              <div class="row"><strong>Lungime:</strong> 4636mm</div>
+              <div class="row"><strong>Greutate:</strong> 1340kg</div>
+              <div class="row"><strong>Portbagaj:</strong> 371L</div>
+              <div class="row"><strong>Rezervor:</strong> 50L</div>
+            </div>
+            <div class="specs-features">
+              <strong>Dotări:</strong> Android Auto/Apple CarPlay wireless, Ecran 8", Asistență menținere bandă, ABS 4 roți, Faruri LED, Climatizare
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-outline" onclick="toggleSpecs('specs-corolla', this)">Vezi specificații ↓</button>
+          <a href="mailto:danaa_a@yahoo.com?subject=Inchiriere%20Toyota%20Corolla%20Bucuresti" class="btn-primary">Rezervă acum →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Honda PCX125 -->
+    <div class="fleet-card" id="scooter-card">
+      <div class="fleet-card-img">
+        <img src="honda_no_background.png" alt="Honda PCX125">
+      </div>
+      <div class="fleet-card-body">
+        <span class="badge">10 disponibile</span>
+        <h3>Honda PCX125</h3>
+        <p class="subtitle">Scuter 125cc · Model 2025</p>
+        <div class="quick-specs">
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14l-4-4h3V8h2v4h3l-4 4z"/></svg>
+            CVT Automat
+          </div>
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h2l3-9 4 18 3-9h6"/></svg>
+            2.1 L/100km
+          </div>
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            12.5 CP
+          </div>
+          <div class="spec-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            ABS
+          </div>
+        </div>
+        <div class="specs-panel" id="specs-pcx">
+          <div class="specs-inner">
+            <h4>Specificații tehnice</h4>
+            <div class="specs-grid">
+              <div class="row"><strong>Motor:</strong> 125cc monocilindru</div>
+              <div class="row"><strong>Putere:</strong> 12.5 CP</div>
+              <div class="row"><strong>Transmisie:</strong> CVT automat</div>
+              <div class="row"><strong>Consum:</strong> 2.1L/100km</div>
+              <div class="row"><strong>Autonomie:</strong> 350km</div>
+              <div class="row"><strong>Rezervor:</strong> 8.1L</div>
+              <div class="row"><strong>Greutate:</strong> 133kg</div>
+              <div class="row"><strong>Frânare:</strong> ABS</div>
+            </div>
+            <div class="specs-features">
+              <strong>Dotări:</strong> Smart Key, Start/Stop, Full LED, USB, Spațiu sub șa
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-outline" onclick="toggleSpecs('specs-pcx', this)">Vezi specificații ↓</button>
+          <a href="mailto:danaa_a@yahoo.com?subject=Inchiriere%20Honda%20PCX125%20Bucuresti" class="btn-primary">Rezervă acum →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="despre">
+  <div class="container">
+    <span class="section-label">De ce noi</span>
+    <h2 class="section-heading">Simplu, rapid, de încredere</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3>Vehicule noi</h3>
+        <p>Toate vehiculele din flotă sunt modele recente, bine întreținute și pregătite pentru drum.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3>Prețuri transparente</h3>
+        <p>Fără costuri ascunse sau surprize. Știi exact cât plătești de la început.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h3>Suport non-stop</h3>
+        <p>Echipa noastră e disponibilă 24/7 pentru orice întrebare sau situație neprevăzută.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <span class="section-label">Rezervare</span>
+    <h2 class="section-heading">Contactează-ne</h2>
+    <div class="contact-box">
+      <p>Trimite-ne un email cu perioada dorită și vehiculul preferat.</p>
+      <a href="mailto:danaa_a@yahoo.com?subject=Inchiriere%20vehicul%20Bucuresti" class="btn-primary">Rezervă acum</a>
+      <div class="location">📍 București</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    © 2026 Levente Mobility · București · Toate drepturile rezervate
+  </div>
+</footer>
+
+<script>
+function toggleSpecs(id, btn) {
+  var panel = document.getElementById(id);
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    btn.textContent = 'Ascunde specificații ↑';
+  } else {
+    btn.textContent = 'Vezi specificații ↓';
+  }
+}
+</script>
+</body>
+</html>
